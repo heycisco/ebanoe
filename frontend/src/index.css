@@ -1,0 +1,164 @@
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+:focus,
+:active,
+a:focus,
+a:active {
+	outline: none;
+}
+
+html,
+body {
+	height: 100%;
+	font-size: 100%;
+	line-height: 1;
+	-webkit-text-size-adjust: 100%;
+	max-width: 100vw;
+	overflow-x: hidden;
+}
+
+body {
+	width: 100%;
+}
+
+/* input,
+button,
+textarea {
+	font-family: inherit;
+	font-weight: inherit;
+	background: inherit;
+	font-size: inherit;
+	color: inherit;
+	text-shadow: inherit;
+	letter-spacing: inherit;
+	border-radius: 0;
+} */
+
+input::-ms-clear {
+	display: none;
+}
+
+button,
+a {
+	cursor: pointer;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+ul li {
+	list-style: none;
+}
+
+img,
+figure,
+picture > object {
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:focus,
+	a:hover,
+	a:active,
+	a:visited {
+		text-decoration: none;
+		color: inherit;
+	}
+
+.App {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 30px;
+	font-family: sans-serif;
+}
+
+.App .logo {
+		max-width: 300px;
+	}
+
+.App .post-list {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+.App .post {
+		width: 600px;
+	}
+
+.App .post__content {
+			border: 1px solid #333;
+			padding: 24px;
+			width: 100%;
+		}
+
+button:disabled {
+	pointer-events: none;
+}
+
+.manipulate-content {
+	font-size: 16px;
+	display: flex;
+    margin: 20px 0;
+    width: 100%;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.manipulate-content .search {
+		display: flex;
+		width: 300px;
+		border: 1px solid #ccc;
+		padding: 12px;
+	}
+
+.manipulate-content .sort {
+		display: flex;
+		width: 300px;
+		border: 1px solid #ccc;
+		padding: 12px;
+	}
+
+.manipulate-content input[type="checkbox"] {
+		margin-right: 8px;
+	}
+
+.modal {
+	display: none;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background: #0000005e;
+}
+
+.modal.active {
+		display: flex;
+	}
+
+.modal__wrapper {
+		background: #ccc;
+		padding: 32px;
+	}

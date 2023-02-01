@@ -1,0 +1,71 @@
+@import 'nullstyle';
+
+#root {
+}
+.App {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 30px;
+	font-family: sans-serif;
+	.logo {
+		max-width: 300px;
+	}
+	.post-list {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.post {
+		width: 600px;
+		&__content {
+			border: 1px solid #333;
+			padding: 24px;
+			width: 100%;
+		}
+	}
+}
+button:disabled {
+	pointer-events: none;
+}
+.manipulate-content {
+	font-size: 16px;
+	display: flex;
+    margin: 20px 0;
+    width: 100%;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+	.search {
+		display: flex;
+		width: 300px;
+		border: 1px solid #ccc;
+		padding: 12px;
+	}
+	.sort {
+		display: flex;
+		width: 300px;
+		border: 1px solid #ccc;
+		padding: 12px;
+	}
+	input[type="checkbox"] {
+		margin-right: 8px;
+	}
+}
+.modal {
+	display: none;
+	position: fixed 0;
+	size: 100%;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background: #0000005e;
+	&.active {
+		display: flex;
+	}
+
+	&__wrapper {
+		background: #ccc;
+		padding: 32px;
+	}
+}
