@@ -38,5 +38,8 @@ export const useSort = (posts, sort, reverse, query, advSearch, postLength) => {
 		}
 		return postsTemp;
 	}, [sortedPosts, query, advSearch]);
-	return sortedSearchedPost.slice(0, (postLength));
+	return {
+		content: sortedSearchedPost.slice(0, postLength),
+		searched: sortedSearchedPost.length,
+	};
 };

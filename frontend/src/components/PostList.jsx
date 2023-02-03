@@ -2,7 +2,7 @@ import React from 'react';
 import PostItem from './PostItem';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-const PostList = ({ title, posts, loadedPage, pagination }) => {
+const PostList = ({ posts, loadedPage, pagination, searched }) => {
 	if (!posts.length) {
 		return (
 			<div>
@@ -14,10 +14,10 @@ const PostList = ({ title, posts, loadedPage, pagination }) => {
 		<div>
 			<div className='post-info'>
 				<span>
-					{title}: {posts.length}/{pagination.total}
+				Displayed: {posts.length} | Search: {searched} | All: {pagination.total}
 				</span>
 				<span>
-					Page: {loadedPage}/{pagination.pageCount}
+					Page: {loadedPage}/{Math.ceil(searched / pagination.pageSize)}
 				</span>
 			</div>
 

@@ -14,24 +14,31 @@ function App() {
 	const [pagination, setPagination] = useState({});
 	const [posts, setPosts] = useState([]);
 	const [loaded, setLoaded] = useState(false);
+	const [postsTemp] = useState([]);
+	const [ready, setReady] = useState();
 	const endOfPage = useRef();
 	const observerPage = useRef();
 
 	useEffect(() => {
-		const response = `http://localhost:1337/api/posts/?populate=*&pagination[pageSize]=2&pagination[page]=${currentPage}`;
 		const getPosts = async () => {
+			const response = `http://localhost:1337/api/posts/?populate=*&pagination[pageSize]=2&pagination[page]=${currentPage}`;
+			console.log(currentPage);
 			const { data } = await axios.get(response);
-			if (currentPage <= data.meta.pagination.pageCount) {
-				setPagination(data.meta.pagination);
-				setPosts([...posts, ...data.data]);
-				return setCurrentPage(currentPage + 1);
-			} else {
-				return setLoaded(true);
+			setPagination(data.meta.pagination);
+			postsTemp.push(...data.data);
+			setCurrentPage(currentPage + 1);
+			if (currentPage >= data.meta.pagination.pageCount) {
+				setReady(true);
 			}
 		};
+		if (ready) {
+			setPosts(postsTemp.slice(2));
+			setLoaded(true);
+			return () => {
+			};
+		}
 		getPosts();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentPage]);
+	}, [currentPage, postsTemp, ready]);
 
 	const [filter, setFilter] = useState({
 		sort: '',
@@ -39,6 +46,7 @@ function App() {
 		query: '',
 		advSearch: false,
 	});
+
 	const postsReady = useSort(
 		posts,
 		filter.sort,
@@ -47,11 +55,16 @@ function App() {
 		filter.advSearch,
 		loadedPage * pagination.pageSize,
 	);
+
 	useEffect(() => {
-		if (loadedPage > pagination.pageCount) {
-			setLoadedPage(pagination.pageCount);
+		const postsNow = Math.ceil(postsReady.searched / pagination.pageSize);
+		if (loadedPage > postsNow) {
+			setLoadedPage(postsNow);
 		}
-	}, [loadedPage, pagination.pageCount]);
+		if (postsReady.searched > 0 && loadedPage < 1) {
+			setLoadedPage(1);
+		}
+	}, [loadedPage, postsReady.searched, pagination.pageSize]);
 
 	useEffect(() => {
 		if (loaded) {
@@ -63,7 +76,6 @@ function App() {
 			observerPage.current = new IntersectionObserver(callback);
 			observerPage.current.observe(endOfPage.current);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loaded, endOfPage]);
 
 	const [modal, setModal] = useState(false);
@@ -83,10 +95,10 @@ function App() {
 				<h2>Loading…</h2>
 			) : (
 				<PostList
-					posts={postsReady}
-					title='Posts'
+					posts={postsReady.content}
 					loadedPage={loadedPage}
 					pagination={pagination}
+					searched={postsReady.searched}
 				/>
 			)}
 			{loaded && (
@@ -109,4 +121,4 @@ function App() {
 export default App;
 
 // SINGLE EXAMPLE
-// http://localhost:1337/api/slugify/slugs/post/example-post-1?populate=*
+// http://localhost:1337/api/slugify/slugs/post/post-9999?populate=*
