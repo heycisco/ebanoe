@@ -9,6 +9,7 @@ const PostFilter = ({ filter, setFilter }) => {
 			<div className='search'>
 				<InputDefault
 					placeholder='Search'
+					type='text'
 					value={filter.query}
 					onChange={(e) => setFilter({ ...filter, query: e.target.value })}
 				/>
@@ -24,7 +25,8 @@ const PostFilter = ({ filter, setFilter }) => {
 					options={[
 						{ value: '', name: 'Default' },
 						{ value: 'title', name: 'Title' },
-						{ value: 'publishedAt', name: 'Date' },
+						{ value: 'createdAt', name: 'Created' },
+						{ value: 'updatedAt', name: 'Udpated' },
 					]}
 					value={filter.sort}
 					onChange={(selectedSort) =>
