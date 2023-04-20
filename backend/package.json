@@ -12,9 +12,9 @@
   "dependencies": {
     "@_sh/strapi-plugin-ckeditor": "^2.0.2",
     "@ckeditor/strapi-plugin-ckeditor": "^0.0.5",
-    "@strapi/plugin-i18n": "4.6.0",
-    "@strapi/plugin-users-permissions": "4.6.0",
-    "@strapi/strapi": "4.6.0",
+    "@strapi/plugin-i18n": "4.9.0",
+    "@strapi/plugin-users-permissions": "4.9.0",
+    "@strapi/strapi": "4.9.0",
     "better-sqlite3": "7.4.6",
     "npmcli": "^1.2.2",
     "strapi-plugin-slugify": "^2.3.2"

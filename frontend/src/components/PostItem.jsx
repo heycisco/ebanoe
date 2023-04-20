@@ -27,48 +27,44 @@ const PostItem = (props) => {
 	}
 
 	return (
-		<div>
-			<div
-				className={
-					'post' + (props.content.more ? ' more' : '') + expand.class
-				}
-				onClick={() => togglePost(true)}>
-				<div className='post__content'>
-					<div className='post__date'>
-						{dateFormat(props.content.createdAt)}
-					</div>
-					<h2 className='post__title'>{props.content.title}</h2>
-					{props.content.image.data && (
-						<img
-							src={localHostFix(props.content.image.data.attributes.url)}
-							alt={props.content.image.data.attributes.name}
-						/>
-					)}
-					{props.content.short && (
-						<div
-							dangerouslySetInnerHTML={{
-								__html: localHostFix(props.content.short),
-							}}
-						/>
-					)}
-					<TransitionGroup className='animate-def'>
-						{props.content.more && expand.active && (
-							<CSSTransition timeout={300} classNames='animate-default'>
-								<div className='post__more'>
-									<div
-										dangerouslySetInnerHTML={{
-											__html: localHostFix(props.content.more),
-										}}
-									/>
-								</div>
-							</CSSTransition>
-						)}
-					</TransitionGroup>
+		<div
+			className={'post' + (props.content.more ? ' more' : '') + expand.class}
+			onClick={() => togglePost(true)}>
+			<div className='post__content'>
+				<div className='post__date'>
+					{dateFormat(props.content.createdAt)}
 				</div>
+				<h2 className='post__title'>{props.content.title}</h2>
+				{props.content.image.data && (
+					<img
+						src={localHostFix(props.content.image.data.attributes.url)}
+						alt={props.content.image.data.attributes.name}
+					/>
+				)}
+				{props.content.short && (
+					<div
+						dangerouslySetInnerHTML={{
+							__html: localHostFix(props.content.short),
+						}}
+					/>
+				)}
+				<TransitionGroup className='animate-def'>
+					{props.content.more && expand.active && (
+						<CSSTransition timeout={300} classNames='animate-default'>
+							<div className='post__more'>
+								<div
+									dangerouslySetInnerHTML={{
+										__html: localHostFix(props.content.more),
+									}}
+								/>
+							</div>
+						</CSSTransition>
+					)}
+				</TransitionGroup>
+			</div>
 
-				<div className='post__close' onClick={(e) => e.stopPropagation()}>
-					<button onClick={() => togglePost(false)}>Close</button>
-				</div>
+			<div className='post__close' onClick={(e) => e.stopPropagation()}>
+				<button onClick={() => togglePost(false)}>Close</button>
 			</div>
 		</div>
 	);

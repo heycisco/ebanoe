@@ -1,0 +1,26 @@
+:root {
+	--content-sides: 50px;
+	--post-feed-width: 720px;
+	--c-text-primary: #3f3f3f;
+	--c-text-secondary: #6d6d6d;
+	--c-bg-primary: #fafafa;
+	--c-bg-secondary: #e4e4e4;
+	--c-button-primary: #fff;
+	--c-button-secondary: #e4e4e4;
+	--c-modal-overlay: #0000008f;
+	--c-input-bg: #fff;
+}
+
+
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+::-webkit-scrollbar-track {
+	background: var(--c-bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+	background: var(--c-text-primary);
+	border-radius: 2px;
+}
+

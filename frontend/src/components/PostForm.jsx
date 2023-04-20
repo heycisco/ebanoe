@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ButtonDefault from './UI/ButtonDefault';
 import InputDefault from './UI/InputDefault';
 import TextareaDefault from './UI/TextareaDefault';
@@ -17,13 +17,22 @@ const PostForm = ({ submit }) => {
 	}
 	const [registerNow, setRegisterNow] = useState({
 		register: false,
-		label: 'register?',
+		label: 'Need to register?',
 	});
+
+	// useEffect(() => {
+	// 	if (user.username && user.password) {
+	// 		console.log('1');
+	// 	} else {
+	// 		console.log('2');
+	// 	}
+	// }, [user]);
+
 	function switchMode(e) {
 		e.preventDefault();
 		!registerNow.register
-			? setRegisterNow({ register: true, label: 'login?' })
-			: setRegisterNow({ register: false, label: 'register?' });
+			? setRegisterNow({ register: true, label: 'Already have an account?' })
+			: setRegisterNow({ register: false, label: 'Need to register?' });
 	}
 
 	function login(e) {
@@ -90,8 +99,11 @@ const PostForm = ({ submit }) => {
 	function addNewPost(e) {
 		e.preventDefault();
 		if (newContent.title.trim()) {
-			
-			sent({ title: newContent.title, short: fixNewLine(newContent.short), categories: [2] });
+			sent({
+				title: newContent.title,
+				short: fixNewLine(newContent.short),
+				categories: [2],
+			});
 		}
 	}
 
@@ -148,34 +160,39 @@ const PostForm = ({ submit }) => {
 		);
 	}
 	return (
-		<form className='login'>
-			<InputDefault
-				type='text'
-				placeholder='Name'
-				value={user.username}
-				onChange={(e) => setUser({ ...user, username: e.target.value })}
-			/>
-			{registerNow.register && (
+		<div>
+			<h4>Login to add a post</h4>
+			<form className='login'>
 				<InputDefault
-					type='email'
-					placeholder='E-mail'
-					value={user.email}
-					onChange={(e) => setUser({ ...user, email: e.target.value })}
+					type='text'
+					placeholder='Name'
+					value={user.username}
+					onChange={(e) => setUser({ ...user, username: e.target.value })}
 				/>
-			)}
-			<InputDefault
-				type='password'
-				placeholder='Password'
-				value={user.password}
-				onChange={(e) => setUser({ ...user, password: e.target.value })}
-			/>
-			{!registerNow.register ? (
-				<button onClick={login}>login</button>
-			) : (
-				<button onClick={register}>register</button>
-			)}
-			<button onClick={switchMode}>{registerNow.label}</button>
-		</form>
+				{registerNow.register && (
+					<InputDefault
+						type='email'
+						placeholder='E-mail'
+						value={user.email}
+						onChange={(e) => setUser({ ...user, email: e.target.value })}
+					/>
+				)}
+				<InputDefault
+					type='password'
+					placeholder='Password'
+					value={user.password}
+					onChange={(e) => setUser({ ...user, password: e.target.value })}
+				/>
+				{!registerNow.register ? (
+					<button onClick={login}>Login</button>
+				) : (
+					<button onClick={register}>Register</button>
+				)}
+			</form>
+			<button className='secondary' onClick={switchMode}>
+				{registerNow.label}
+			</button>
+		</div>
 	);
 };
 
